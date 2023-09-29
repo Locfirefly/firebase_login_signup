@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc_observer.dart';
+import 'forgot_password/forgot_password.dart';
 import 'login/login.dart';
 import 'signup/signup.dart';
 
@@ -19,6 +20,8 @@ void main() async {
       routes: {
         'login': (BuildContext context) =>  Login(FirebaseUserRepository()),
         'signup': (BuildContext context) => const SignUp(),
+        'finds': (BuildContext context) => const ForgotPassword(),
+        //'success': (BuildContext context) => const LoginSuccess(),
       },
     )
   );
