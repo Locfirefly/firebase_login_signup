@@ -6,13 +6,13 @@ import 'user_entity.dart';
 class MyUser extends Equatable {
   final String id;
   final String email;
-  final String name;
+  final String? name;
   String? picture;
 
   MyUser({
     required this.id,
     required this.email,
-    required this.name,
+    this.name,
     this.picture,
   });
 
@@ -49,7 +49,8 @@ class MyUser extends Equatable {
     return MyUserEntity(
       id: id,
       email: email,
-      name: name,
+      name: name.toString(),
+      picture: picture.toString(),
     );
   }
 
@@ -58,6 +59,7 @@ class MyUser extends Equatable {
       id: entity.id,
       email: entity.email,
       name: entity.name,
+      picture: entity.picture,
     );
   }
 

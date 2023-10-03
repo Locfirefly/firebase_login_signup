@@ -1,4 +1,7 @@
+import 'package:firebase_login_signup/login/bloc/login_bloc.dart';
 import 'package:firebase_login_signup/repository/firebase_user_repo.dart';
+import 'package:firebase_login_signup/firebase_auth/email_verification.dart';
+import 'package:firebase_login_signup/signup/bloc/signup_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -14,16 +17,27 @@ void main() async {
   Bloc.observer = SimpleBlocObserver();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(
-     MaterialApp(
-       debugShowCheckedModeBanner: false,
-      home: Login(FirebaseUserRepository()),
-      routes: {
-        'login': (BuildContext context) =>  Login(FirebaseUserRepository()),
-        'signup': (BuildContext context) => const SignUp(),
-        'finds': (BuildContext context) => const ForgotPassword(),
-        //'success': (BuildContext context) => const LoginSuccess(),
-      },
-    )
+     MultiBlocProvider(
+       providers: [
+         BlocProvider<LoginBloc>(
+             create: (context) => LoginBloc(userRepository: FirebaseUserRepository()),
+         ),
+         BlocProvider<SignUpBloc>(
+             create: (context) => SignUpBloc(userRepository: FirebaseUserRepository()),
+         ),
+       ],
+       child: MaterialApp(
+         debugShowCheckedModeBanner: false,
+        home:  Login(FirebaseUserRepository()),
+        routes: {
+          'login': (BuildContext context) =>  Login(FirebaseUserRepository()),
+          'signup': (BuildContext context) => const SignUp(),
+          'finds': (BuildContext context) => const ForgotPassword(),
+          'verify': (BuildContext context) => const Verification(),
+          //'success': (BuildContext context) => const LoginSuccess(),
+        },
+    ),
+     )
   );
 }
 
