@@ -18,6 +18,7 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
       emit(LoginProcess());
       try{
         await _userRepository.login(event.email, event.password);
+        emit(LoginSuccess());
       }
       catch (e){
         log(e.toString());

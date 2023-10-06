@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_login_signup/firebase_auth/auth_bloc.dart';
 import 'package:firebase_login_signup/repository/user_repo.dart';
 import 'package:firebase_login_signup/signup/bloc/signup_bloc.dart';
@@ -16,10 +17,11 @@ class Login extends StatefulWidget {
 }
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
+  final firebaseUser = FirebaseAuth.instance;
   final emailController = TextEditingController();
   final passController = TextEditingController();
   bool passToggle = true;
-  bool signinRequire = false;
+  bool signInRequire = false;
 
   void cleartext(){
     emailController.clear();
@@ -33,19 +35,25 @@ class _LoginState extends State<Login> {
       listener: (context, state) {
         if(state is LoginSuccess){
           setState(() {
-            signinRequire = false;
+            signInRequire = false;
           });
+          if(firebaseUser.currentUser!.emailVerified == true){
+            Navigator.pushNamed(context, 'home');
+          }
+          else{
+            Navigator.pushNamed(context, 'verify');
+          }
           }
         else{
           if(state is LoginProcess){
             setState(() {
-              signinRequire = false;
+              signInRequire = true;
             });
           }
           else{
             if( state is LoginFailure){
               setState(() {
-                signinRequire = true;
+                signInRequire = false;
               });
             }
           }
@@ -201,7 +209,10 @@ class _LoginState extends State<Login> {
                         GestureDetector(
                           onTap: (){
                             if(_formKey.currentState!.validate()){
-                              Navigator.pushNamed(context, 'verify');
+                              context.read<LoginBloc>().add(LoginRequired(
+                                  emailController.text,
+                                  passController.text)
+                              );
                             }
                           },
                           child: Container(
