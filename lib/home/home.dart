@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -9,12 +10,25 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Text('Home'),
+            child: Column(
+              children: [
+                const Text('Home'),
+                OutlinedButton(
+                    onPressed: () async {
+                      SharedPreferences pref = await SharedPreferences.getInstance();
+                      pref.remove('email');
+                      if (!context.mounted) return;
+                      Navigator.of(context).pushReplacementNamed('home');
+                    },
+                    child: const Text('Logout')
+                )
+              ],
+            ),
           )
         ],
       ),
