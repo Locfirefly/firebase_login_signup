@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
                       SharedPreferences pref = await SharedPreferences.getInstance();
                       pref.remove('email');
                       if (!context.mounted) return;
-                      Navigator.of(context).pushReplacementNamed('home');
+                      Navigator.of(context).pushReplacementNamed('login');
                     },
                     child: const Text('Logout')
                 )
