@@ -1,10 +1,15 @@
+import 'package:firebase_login_signup/add_project/add_project.dart';
+import 'package:firebase_login_signup/calendar/calendar.dart';
 import 'package:firebase_login_signup/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:firebase_login_signup/home/home.dart';
 import 'package:firebase_login_signup/login/bloc/login_bloc.dart';
+import 'package:firebase_login_signup/profile/profile.dart';
 import 'package:firebase_login_signup/repository/firebase_user_repo.dart';
+import 'package:firebase_login_signup/setting/setting.dart';
 import 'package:firebase_login_signup/signup/bloc/signup_bloc.dart';
 import 'package:firebase_login_signup/splash/bloc/splash_bloc.dart';
 import 'package:firebase_login_signup/splash/splash_screen.dart';
+import 'package:firebase_login_signup/widgets/project_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -46,6 +51,11 @@ void main() async {
           'verify': (BuildContext context) => const Verification(),
           'home': (BuildContext context) => const Home(),
           'splash': (BuildContext context) => const SplashScreen(),
+          'add_project': (BuildContext context) => const AddProject(),
+          'calendar': (BuildContext context) => const Calendar(),
+          'profile': (BuildContext context) => const Profile(),
+          'setting': (BuildContext context) => const Setting(),
+          'navbar': (BuildContext context) => const NavBar(),
         },
     ),
      )

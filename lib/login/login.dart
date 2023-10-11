@@ -5,6 +5,7 @@ import 'package:firebase_login_signup/signup/bloc/signup_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/size.dart';
 import 'bloc/login_bloc.dart';
@@ -15,7 +16,7 @@ class Login extends StatefulWidget {
   @override
   State<Login> createState() => _LoginState();
 }
-class _LoginState extends State<Login> {
+class _LoginState extends State<Login>  {
   final _formKey = GlobalKey<FormState>();
   final firebaseUser = FirebaseAuth.instance;
   final emailController = TextEditingController();
@@ -33,12 +34,13 @@ class _LoginState extends State<Login> {
     SizeConfig().init(context);
     return BlocListener<LoginBloc,LoginState>(
       listener: (context, state) {
-        if(state is LoginSuccess){
+        if(state is LoginSuccess) {
           setState(() {
             signInRequire = false;
           });
           if(firebaseUser.currentUser!.emailVerified == true){
-            Navigator.pushNamed(context, 'home');
+            autologin();
+            Navigator.of(context).pushReplacementNamed('navbar');
           }
           else{
             Navigator.pushNamed(context, 'verify');
@@ -55,6 +57,12 @@ class _LoginState extends State<Login> {
               setState(() {
                 signInRequire = false;
               });
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Center(
+                          child: Text('Invalid email or password'))
+                  )
+              );
             }
           }
         }
@@ -207,12 +215,25 @@ class _LoginState extends State<Login> {
                         ),
                         SizedBox(height: getProportionateScreenHeight(30)),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () async {
                             if(_formKey.currentState!.validate()){
-                              context.read<LoginBloc>().add(LoginRequired(
-                                  emailController.text,
-                                  passController.text)
-                              );
+                              try {
+                                context.read<LoginBloc>().add(LoginRequired(
+                                    emailController.text,
+                                    passController.text)
+                                );
+                              }
+                              on FirebaseAuthException catch (e) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context){
+                                      return AlertDialog(
+                                        content: Text(e.toString(),
+                                        ),
+                                      );
+                                    }
+                                );
+                              }
                             }
                           },
                           child: Container(
@@ -317,6 +338,10 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+  Future<void> autologin() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString('email', firebaseUser.currentUser!.email.toString());
   }
 }
 

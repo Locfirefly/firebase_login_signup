@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
     return BlocListener<SplashBloc,SplashState>(
       listener: (context,  state) {
         if (state is SplashLoaded) {
-          Navigator.of(context).pushReplacementNamed('home');
+          Navigator.of(context).pushReplacementNamed('navbar');
         }
         else{
           if(state is SplashFailure){

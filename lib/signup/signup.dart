@@ -1,4 +1,3 @@
-
 import 'package:firebase_login_signup/repository/user.dart';
 import 'package:firebase_login_signup/signup/bloc/signup_bloc.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +35,7 @@ class _SignUpState extends State<SignUp> {
           setState(() {
             signupRequire = false;
           });
+          Navigator.of(context).pushReplacementNamed('login');
         }
         else{
           if(state is SignUpProcess){
