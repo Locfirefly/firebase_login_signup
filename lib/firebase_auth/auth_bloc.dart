@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
-import '../repository/user_repo.dart';
+import '../repository/repo.dart';
 
 part 'auth_even.dart';
 part 'auth_state.dart';

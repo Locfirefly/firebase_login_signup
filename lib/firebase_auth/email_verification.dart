@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/size.dart';
 class Verification extends StatefulWidget {
@@ -17,7 +18,7 @@ class _VerificationState extends State<Verification> {
   late Timer timer;
 
   @override
-  void initState(){
+  void initState() async {
     user = auth.currentUser!;
     user.sendEmailVerification();
     timer = Timer.periodic(
@@ -130,8 +131,15 @@ class _VerificationState extends State<Verification> {
     await user.reload();
     if(user.emailVerified){
       timer.cancel();
-      Navigator.of(context).pushReplacementNamed('home');
+      autologin();
+      if (!context.mounted) return;
+      Navigator.of(context).pushReplacementNamed('Login');
     }
+  }
+  Future<void> autologin() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    user = auth.currentUser!;
+    pref.setString('email', user.email!);
   }
 }
 

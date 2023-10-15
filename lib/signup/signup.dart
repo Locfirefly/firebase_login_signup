@@ -1,4 +1,4 @@
-import 'package:firebase_login_signup/repository/user.dart';
+import 'package:firebase_login_signup/repository/model/user.dart';
 import 'package:firebase_login_signup/signup/bloc/signup_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

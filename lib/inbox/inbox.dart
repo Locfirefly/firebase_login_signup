@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-class Setting extends StatefulWidget {
-  const Setting({Key? key}) : super(key: key);
+
+class Inbox extends StatefulWidget {
+  const Inbox({Key? key}) : super(key: key);
 
   @override
-  State<Setting> createState() => _SettingState();
+  State<Inbox> createState() => _InboxState();
 }
 
-class _SettingState extends State<Setting> {
+class _InboxState extends State<Inbox> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title:const Text('Setting',
+        title:const Text('Inbox',
           style: TextStyle(
             color: Colors.grey,
             fontSize: 20,

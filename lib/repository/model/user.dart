@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'user_entity.dart';
+import '../entity/user_entity.dart';
 
 //ignore: must_be_immutable
 class MyUser extends Equatable {

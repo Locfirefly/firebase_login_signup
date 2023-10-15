@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_login_signup/repository/user.dart';
+import 'package:firebase_login_signup/repository/model/user.dart';
 
 abstract class UserRepository{
   Stream<User?> get user;

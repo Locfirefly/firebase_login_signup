@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_login_signup/firebase_auth/auth_bloc.dart';
-import 'package:firebase_login_signup/repository/user_repo.dart';
+import 'package:firebase_login_signup/repository/repo.dart';
 import 'package:firebase_login_signup/signup/bloc/signup_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -217,23 +217,10 @@ class _LoginState extends State<Login>  {
                         GestureDetector(
                           onTap: () async {
                             if(_formKey.currentState!.validate()){
-                              try {
                                 context.read<LoginBloc>().add(LoginRequired(
                                     emailController.text,
                                     passController.text)
                                 );
-                              }
-                              on FirebaseAuthException catch (e) {
-                                showDialog(
-                                    context: context,
-                                    builder: (context){
-                                      return AlertDialog(
-                                        content: Text(e.toString(),
-                                        ),
-                                      );
-                                    }
-                                );
-                              }
                             }
                           },
                           child: Container(

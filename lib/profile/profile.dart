@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/size.dart';
 
 class Profile extends StatefulWidget {
@@ -117,7 +118,11 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ],
                             ),
-                            Icon(Icons.arrow_forward_ios_outlined)
+                            Text('English',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -155,6 +160,7 @@ class _ProfileState extends State<Profile> {
                             Transform.scale(
                               scale: 0.7,
                               child: Switch(
+                                inactiveThumbColor: Colors.grey,
                                 activeColor: const Color(0xfff77546),
                                   value: isSwitch,
                                   onChanged: (value) {
@@ -233,34 +239,42 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     SizedBox(height: SizeConfig.screenHeight * 0.02),
-                    Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.logout_outlined,
-                                  size: 30,
-                                  color: Color(0xfff77546),
-                                ),
-                                SizedBox(width: 10),
-                                Text('LogOut',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                    GestureDetector(
+                      onTap: () async {
+                        SharedPreferences pref = await SharedPreferences.getInstance();
+                        pref.remove('email');
+                        if (!context.mounted) return;
+                        Navigator.of(context).pushReplacementNamed('login');
+                      },
+                      child: Container(
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(Icons.logout_outlined,
+                                    size: 30,
+                                    color: Color(0xfff77546),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Icon(Icons.arrow_forward_ios_outlined)
-                          ],
+                                  SizedBox(width: 10),
+                                  Text('LogOut',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Icon(Icons.arrow_forward_ios_outlined)
+                            ],
+                          ),
                         ),
                       ),
                     ),

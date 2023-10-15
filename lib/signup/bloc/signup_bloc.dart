@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:firebase_login_signup/repository/user.dart';
-import 'package:firebase_login_signup/repository/user_repo.dart';
+import 'package:firebase_login_signup/repository/model/user.dart';
+import 'package:firebase_login_signup/repository/repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'signup_even.dart';
 part 'signup_state.dart';

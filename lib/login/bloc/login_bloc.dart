@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import '../../repository/user_repo.dart';
+import '../../repository/repo.dart';
 
 part 'login_state.dart';
 part 'login_even.dart';

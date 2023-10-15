@@ -4,8 +4,7 @@ import 'package:firebase_login_signup/forgot_password/bloc/forgot_password_bloc.
 import 'package:firebase_login_signup/home/home.dart';
 import 'package:firebase_login_signup/login/bloc/login_bloc.dart';
 import 'package:firebase_login_signup/profile/profile.dart';
-import 'package:firebase_login_signup/repository/firebase_user_repo.dart';
-import 'package:firebase_login_signup/setting/setting.dart';
+import 'package:firebase_login_signup/repository/firebase_repo.dart';
 import 'package:firebase_login_signup/signup/bloc/signup_bloc.dart';
 import 'package:firebase_login_signup/splash/bloc/splash_bloc.dart';
 import 'package:firebase_login_signup/splash/splash_screen.dart';
@@ -54,7 +53,6 @@ void main() async {
           'add_project': (BuildContext context) => const AddProject(),
           'calendar': (BuildContext context) => const Calendar(),
           'profile': (BuildContext context) => const Profile(),
-          'setting': (BuildContext context) => const Setting(),
           'navbar': (BuildContext context) => const NavBar(),
         },
     ),

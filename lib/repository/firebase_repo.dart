@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_login_signup/repository/user.dart';
+import 'package:firebase_login_signup/repository/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_login_signup/repository/user_entity.dart';
-import 'package:firebase_login_signup/repository/user_repo.dart';
+import 'package:firebase_login_signup/repository/entity/user_entity.dart';
+import 'package:firebase_login_signup/repository/repo.dart';
 
 class FirebaseUserRepository implements UserRepository{
 
@@ -45,7 +45,8 @@ class FirebaseUserRepository implements UserRepository{
       );
 
       myUser = myUser.copyWith(
-          id: userCredential.user!.uid
+        id: userCredential.user!.uid,
+        name: userCredential.user!.displayName,
       );
 
       return myUser;

@@ -19,7 +19,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     emailController.clear();
   }
 
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
