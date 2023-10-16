@@ -7,12 +7,14 @@ class MyUser extends Equatable {
   final String id;
   final String email;
   final String? name;
+  final String? password;
   String? picture;
 
   MyUser({
     required this.id,
     required this.email,
     this.name,
+    this.password,
     this.picture,
   });
 
@@ -21,6 +23,7 @@ class MyUser extends Equatable {
       id: '',
       email: '',
       name: '',
+      password: '',
       picture: ''
   );
 
@@ -36,6 +39,7 @@ class MyUser extends Equatable {
       id: id ?? this.id,
       email: email ?? this.email,
       name: name ?? this.name,
+      password: password ?? this.password,
       picture: picture ?? this.picture,
     );
   }
@@ -66,6 +70,6 @@ class MyUser extends Equatable {
 
 
   @override
-  List<Object?> get props => [id, email, name, picture];
+  List<Object?> get props => [id, email, name, password, picture];
 
 }

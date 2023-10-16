@@ -5,13 +5,13 @@ abstract class AddProjectEven extends Equatable {
   @override
   List<Object> get props => [];
 }
-class AddProject extends AddProjectEven{
-  final String prName;
-  final String prDescription;
-  final String startDate;
-  final String endDate;
+class AddProjectRequire extends AddProjectEven{
+  final String name;
+  final String description;
+  final String start;
+  final String end;
   final String color;
   final String owner;
 
-  const AddProject(this.prName,this.prDescription, this.startDate, this.endDate, this.color,this.owner);
+  const AddProjectRequire( this.name,this.description, this.start, this.end, this.color,this.owner);
 }

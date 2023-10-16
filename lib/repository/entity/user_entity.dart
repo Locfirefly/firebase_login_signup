@@ -24,15 +24,15 @@ class MyUserEntity extends Equatable {
 
   static MyUserEntity fromDocument(Map<String, dynamic> doc) {
     return MyUserEntity(
-        id: doc['id'] as String,
-        email: doc['email'] as String,
-        name: doc['name'] as String,
+      id: doc['id'] as String,
+      email: doc['email'] as String,
+      name: doc['name'] as String,
       picture: doc['picture'] as String,
     );
   }
 
   @override
-  List<Object?> get props => [id, email, name];
+  List<Object?> get props => [id, email, name, picture];
 
   @override
   String toString() {
@@ -40,6 +40,7 @@ class MyUserEntity extends Equatable {
       id: $id
       email: $email
       name: $name
+      picture: $picture
     }''';
   }
 }

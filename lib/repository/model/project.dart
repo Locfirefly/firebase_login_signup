@@ -3,51 +3,51 @@ import '../entity/project_entity.dart';
 
 //ignore: must_be_immutable
 class Project extends Equatable {
-  String? prId;
-  String prName;
-  String prDescription;
-  DateTime? startDate;
-  DateTime? endDate;
+  String? id;
+  String name;
+  String description;
+  String start;
+  String end;
   String color;
   String owner;
 
   Project({
-    this.prId,
-    required this.prName,
-    required this.prDescription,
-    required this.startDate,
-    required this.endDate,
+    this.id,
+    required this.name,
+    required this.description,
+    required this.start,
+    required this.end,
     required this.color,
     required this.owner,
   });
 
   /// Empty user which represents an unauthenticated user.
   static final empty = Project(
-    prId: '',
-    prName: '',
-    prDescription: '',
-    startDate: null,
-    endDate: null,
+    id: '',
+    name: '',
+    description: '',
+    start: '',
+    end: '',
     color: '',
     owner: '',
   );
 
   /// Modify MyUser parameters
   Project copyWith({
-    String? prId,
-    String? prName,
-    String? prDescription,
-    DateTime? startDate,
-    DateTime? endDate,
+    String? id,
+    String? name,
+    String? description,
+    String? start,
+    String? end,
     String? color,
     String? owner,
   }) {
     return Project(
-        prId: prId ?? this.prId,
-        prName: prName ?? this.prName,
-        prDescription: prDescription ?? this.prDescription,
-        startDate: startDate ?? this.startDate,
-        endDate: endDate ?? this.endDate,
+        id: id ?? this.id,
+        name: name ?? this.name,
+        description: description ?? this.description,
+        start: start ?? this.start,
+        end: end ?? this.end,
         color: color ?? this.color,
         owner: owner ?? this.owner,
 
@@ -61,11 +61,11 @@ class Project extends Equatable {
   bool get isNotEmpty => this != Project.empty;
   ProjectEntity toEntity() {
     return ProjectEntity(
-      prId: prId,
-      prName: prName,
-      prDescription: prDescription,
-      startDate: startDate,
-      endDate: endDate,
+      id: id,
+      name: name,
+      description: description,
+      start: start,
+      end: end,
       color: color,
       owner: owner,
     );
@@ -73,11 +73,11 @@ class Project extends Equatable {
 
   static Project fromEntity(ProjectEntity entity) {
     return Project(
-      prId: entity.prId,
-      prName: entity.prName,
-      prDescription: entity.prDescription,
-      startDate: entity.startDate,
-      endDate: entity.endDate,
+      id: entity.id,
+      name: entity.name,
+      description: entity.description,
+      start: entity.start,
+      end: entity.end,
       color: entity.color,
       owner: entity.owner,
     );
@@ -86,11 +86,11 @@ class Project extends Equatable {
   @override
   String toString() {
     return '''Project: {
-      prId: $prId
-      prName: $prName
-      prDescription: $prDescription
-      startDate: $startDate
-      endDate: $endDate
+      id: $id
+      name: $name
+      description: $description
+      start: $start
+      end: $end
       color: $color
       owner: $owner
     }''';

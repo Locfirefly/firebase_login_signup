@@ -8,7 +8,7 @@ class Profile extends StatefulWidget {
   @override
   State<Profile> createState() => _ProfileState();
 }
-bool isSwitch = true;
+bool isSwitch = false;
 
 class _ProfileState extends State<Profile> {
   @override

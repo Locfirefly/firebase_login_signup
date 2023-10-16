@@ -48,6 +48,7 @@ class FirebaseUserRepository implements UserRepository{
 
       myUser = myUser.copyWith(
         id: userCredential.user!.uid,
+        name: userCredential.user!.displayName
       );
 
       return myUser;

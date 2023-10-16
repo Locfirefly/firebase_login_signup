@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_login_signup/repository/model/user.dart';
 import 'package:firebase_login_signup/signup/bloc/signup_bloc.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
   final passController = TextEditingController();
   final repassController = TextEditingController();
+  final firebaseUser = FirebaseAuth.instance;
   bool signupRequire = false;
 
   void cleartext(){
@@ -243,6 +245,7 @@ class _SignUpState extends State<SignUp> {
                         MyUser myUser = MyUser.empty;
                         myUser = myUser.copyWith(
                           email: emailController.text,
+                          name: firebaseUser.currentUser!.displayName,
                         );
                         setState(() {
                           context.read<SignUpBloc>().add(

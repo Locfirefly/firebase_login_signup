@@ -1,30 +1,30 @@
 
 class ProjectEntity {
-  String? prId;
-  String prName;
-  String prDescription;
-  DateTime? startDate;
-  DateTime? endDate;
+  String? id;
+  String name;
+  String description;
+  String start;
+  String end;
   String color;
   String owner;
 
   ProjectEntity({
-    this.prId,
-    required this.prName,
-    required this.prDescription,
-    required this.startDate,
-    required this.endDate,
+    this.id,
+    required this.name,
+    required this.description,
+    required this.start,
+    required this.end,
     required this.color,
     required this.owner,
   });
 
   Map<String, Object?> toDocument() {
     return {
-      'prId': prId,
-      'prName': prName,
-      'prDescription': prDescription,
-      'startDate': startDate,
-      'endDate': endDate,
+      'id': id,
+      'name': name,
+      'description': description,
+      'start': start,
+      'end': end,
       'color' : color,
       'owner' : owner,
     };
@@ -32,26 +32,26 @@ class ProjectEntity {
 
   static ProjectEntity fromDocument(Map<String, dynamic> doc) {
     return ProjectEntity(
-      prId: doc['prId'] as String,
-      prName: doc['prName'] as String,
-      prDescription: doc['prDescription'] as String,
-      startDate: doc['startDate'] as DateTime,
-      endDate: doc['endDate'] as DateTime,
+      id: doc['id'] as String,
+      name: doc['name'] as String,
+      description: doc['description'] as String,
+      start: doc['start'] as String,
+      end: doc['end'] as String,
       color: doc['color'] as String,
       owner: doc['owner'] as String,
     );
   }
 
-  List<Object?> get props => [prId, prName, prDescription, startDate,endDate,color,owner];
+  List<Object?> get props => [id, name, description, start,end,color,owner];
 
   @override
   String toString() {
     return '''ProjectEntity: {
-      prId: $prId
-      prName: $prName
-      prDescription: $prDescription
-      startDate: $startDate
-      endDate: $endDate
+      id: $id
+      name: $name
+      description: $description
+      start: $start
+      end: $end
       color: $color
       owner: $owner
     }''';
