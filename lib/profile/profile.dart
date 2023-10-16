@@ -8,9 +8,9 @@ class Profile extends StatefulWidget {
   @override
   State<Profile> createState() => _ProfileState();
 }
+bool isSwitch = true;
 
 class _ProfileState extends State<Profile> {
-  bool isSwitch = false;
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);

@@ -88,6 +88,20 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xfff77546),
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+        onPressed: (){
+          Navigator.of(context).pushNamed('add_project');
+        },
+        child: const Icon(Icons.add,
+        size: 30,
+        color: Colors.white,
+        ),
+      ),
     );
   }
 }

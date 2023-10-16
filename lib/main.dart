@@ -1,4 +1,4 @@
-import 'package:firebase_login_signup/add_project/add_project.dart';
+import 'package:firebase_login_signup/add_project/add_project.dart' as  add;
 import 'package:firebase_login_signup/calendar/calendar.dart';
 import 'package:firebase_login_signup/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:firebase_login_signup/home/home.dart';
@@ -13,12 +13,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'add_project/bloc/add_project_bloc.dart';
 import 'bloc_observer.dart';
 import 'firebase_auth/email_verification.dart';
 import 'forgot_password/forgot_password.dart';
 import 'login/login.dart';
 import 'signup/signup.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -27,6 +27,9 @@ void main() async {
   runApp(
      MultiBlocProvider(
        providers: [
+         BlocProvider<AddProjectBloc>(
+           create: (context) => AddProjectBloc(userRepository: FirebaseUserRepository()),
+         ),
          BlocProvider<ChangeBloc>(
            create: (context) => ChangeBloc(userRepository: FirebaseUserRepository()),
          ),
@@ -50,7 +53,7 @@ void main() async {
           'verify': (BuildContext context) => const Verification(),
           'home': (BuildContext context) => const Home(),
           'splash': (BuildContext context) => const SplashScreen(),
-          'add_project': (BuildContext context) => const AddProject(),
+          'add_project': (BuildContext context) => const add.AddProject(),
           'calendar': (BuildContext context) => const Calendar(),
           'profile': (BuildContext context) => const Profile(),
           'navbar': (BuildContext context) => const NavBar(),

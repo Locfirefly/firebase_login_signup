@@ -1,6 +1,6 @@
 
 class ProjectEntity {
-  String prId;
+  String? prId;
   String prName;
   String prDescription;
   DateTime? startDate;
@@ -9,7 +9,7 @@ class ProjectEntity {
   String owner;
 
   ProjectEntity({
-    required this.prId,
+    this.prId,
     required this.prName,
     required this.prDescription,
     required this.startDate,

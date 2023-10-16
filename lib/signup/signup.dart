@@ -36,6 +36,12 @@ class _SignUpState extends State<SignUp> {
             signupRequire = false;
           });
           Navigator.of(context).pushReplacementNamed('login');
+          cleartext();
+          const SnackBar(
+              content: Center(
+                  child: Text('Sign In success'))
+          );
+
         }
         else{
           if(state is SignUpProcess){
@@ -48,6 +54,10 @@ class _SignUpState extends State<SignUp> {
               setState(() {
                 signupRequire = false;
               });
+              const SnackBar(
+                  content: Center(
+                      child: Text('Email already in use'))
+              );
               return;
             }
           }
@@ -242,8 +252,7 @@ class _SignUpState extends State<SignUp> {
                               )
                           );
                         });
-                        cleartext();
-                        Navigator.pop(context);
+
                       }
                     },
                     child: Container(

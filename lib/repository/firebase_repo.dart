@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_login_signup/repository/model/project.dart';
 import 'package:firebase_login_signup/repository/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_login_signup/repository/entity/user_entity.dart';
@@ -13,6 +14,7 @@ class FirebaseUserRepository implements UserRepository{
 
   final FirebaseAuth _firebaseAuth;
   final usersCollection = FirebaseFirestore.instance.collection('users');
+  final projectCollection = FirebaseFirestore.instance.collection('projects');
 
   @override
   Stream<User?> get user {
@@ -46,7 +48,6 @@ class FirebaseUserRepository implements UserRepository{
 
       myUser = myUser.copyWith(
         id: userCredential.user!.uid,
-        name: userCredential.user!.displayName,
       );
 
       return myUser;
@@ -100,6 +101,24 @@ class FirebaseUserRepository implements UserRepository{
       log(e.toString());
       rethrow;
     }
+  }
+
+  @override
+  Future<Project> addProject(Project project) async {
+    try{
+      await projectCollection.doc().set(project.toEntity().toDocument());
+      return project;
+    }
+    catch (e){
+      log(e.toString());
+      rethrow;
+        }
+  }
+
+  @override
+  Future<List<Project>> getProject() {
+
+    throw UnimplementedError();
   }
 
 }

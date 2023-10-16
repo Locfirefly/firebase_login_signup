@@ -10,8 +10,15 @@ class AddProject extends StatefulWidget {
 
 class _AddProjectState extends State<AddProject> {
   int selectedColor = 0;
+  DateTime? startDate ;
+  DateTime? endDate;
+  final projectName = TextEditingController();
+  final projectDescription = TextEditingController();
+  String color = '';
+
   @override
   Widget build(BuildContext context) {
+
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: Colors.white,
@@ -30,7 +37,7 @@ class _AddProjectState extends State<AddProject> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: SizeConfig.screenHeight * 0.03),
+              SizedBox(height: SizeConfig.screenHeight * 0.04),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextFormField(
@@ -47,7 +54,7 @@ class _AddProjectState extends State<AddProject> {
                       color: Colors.grey.shade400,
                     ),
                     labelStyle: const TextStyle(
-                      fontSize: 20,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: Color(0xfff77546),
                     ),
@@ -56,13 +63,14 @@ class _AddProjectState extends State<AddProject> {
                       borderSide: BorderSide(color: Colors.grey),
                     ),
                   ),
+                  controller: projectName,
                 ),
               ),
-              SizedBox(height: SizeConfig.screenHeight * 0.01),
+              SizedBox(height: SizeConfig.screenHeight * 0.02),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextFormField(
-                  maxLines: 3,
+                  maxLines: 4,
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.grey.shade400,
@@ -76,106 +84,141 @@ class _AddProjectState extends State<AddProject> {
                       color: Colors.grey.shade400,
                     ),
                     labelStyle: const TextStyle(
-                      fontSize: 20,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: Color(0xfff77546),
                     ),
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                   ),
+                  controller: projectDescription,
                 ),
               ),
-              SizedBox(height: SizeConfig.screenHeight * 0.03),
+              SizedBox(height: SizeConfig.screenHeight * 0.05),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      height: 65,
-                      width: 160,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.grey.shade200,
-                      ),
-                      child: const Padding(
-                        padding:  EdgeInsets.symmetric(vertical: 10),
-                        child:  Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(width: 10,),
-                            Icon(Icons.calendar_month,
-                              color: Colors.amber,
-                              size: 30,
-                            ),
-                            SizedBox(width: 10),
-                            Column(
+                    GestureDetector(
+                      onTap: () async {
+                        DateTime? start = await showDatePicker(
+                          context: context,
+                          initialDate: startDate,
+                          firstDate: DateTime(2022),
+                          lastDate: DateTime(2100),
+                        );
+                        if(start != null){
+                          setState(() {
+                            startDate = start;
+                          });
+                        }
+                      },
+                      child: AbsorbPointer(
+                        child: Container(
+                          height: 68,
+                          width: 160,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.grey.shade200,
+                          ),
+                          child: Padding(
+                            padding:  const EdgeInsets.symmetric(vertical: 10),
+                            child:  Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('25 Dec, 2020',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.amber,
-                                    fontSize: 16,
-                                  ),
+                                const SizedBox(width: 10,),
+                                const Icon(Icons.calendar_month,
+                                  color: Colors.amber,
+                                  size: 30,
                                 ),
-                                Text('Start date',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                const SizedBox(width: 10),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(startDate == null ? "yyyy-mm-dd" : "${startDate?.year}-${startDate?.month}-${startDate?.day}" ,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.amber,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    const Text('Start date',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                    Container(
-                      height: 65,
-                      width: 160,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.grey.shade200,
-                      ),
-                      child: const Padding(
-                        padding:  EdgeInsets.symmetric(vertical: 10),
-                        child:  Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(width: 10,),
-                            Icon(Icons.calendar_month,
-                              color: Colors.pinkAccent,
-                              size: 30,
-                            ),
-                            SizedBox(width: 10),
-                            Column(
+                    GestureDetector(
+                      onTap: () async {
+                        DateTime? end = await showDatePicker(
+                            context: context,
+                            initialDate: startDate,
+                            firstDate: DateTime(2022),
+                            lastDate: DateTime(2100),
+                        );
+                        if(end != null){
+                          setState(() {
+                            endDate = end;
+                          });
+                        }
+                      },
+                      child: AbsorbPointer(
+                        child: Container(
+                          height: 68,
+                          width: 160,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.grey.shade200,
+                          ),
+                          child: Padding(
+                            padding:  const EdgeInsets.symmetric(vertical: 10),
+                            child:  Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('25 Dec, 2020',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.pinkAccent,
-                                    fontSize: 16,
-                                  ),
+                                const SizedBox(width: 10,),
+                                const Icon(Icons.calendar_month,
+                                  color: Colors.pinkAccent,
+                                  size: 30,
                                 ),
-                                Text('Dead line',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                const SizedBox(width: 10),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text( endDate == null ? 'yyyy-mm-dd' : "${endDate?.year}-${endDate?.month}-${endDate?.day}",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.pinkAccent,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    const Text('Dead line',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: SizeConfig.screenHeight * 0.02),
+              SizedBox(height: SizeConfig.screenHeight * 0.03),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Container(
-                  height: 50,
+                  height: 60,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     color: Colors.grey.shade200,
@@ -193,7 +236,7 @@ class _AddProjectState extends State<AddProject> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(width: 60),
+                      const SizedBox(width: 50),
                       Wrap(
                         children: List<Widget>.generate(4, (int index) {
                               return  GestureDetector(
@@ -205,8 +248,8 @@ class _AddProjectState extends State<AddProject> {
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 5),
                                   child: CircleAvatar(
-                                    radius: 12,
-                                    backgroundColor: index == 0 ? Colors.amber :
+                                    radius: 14,
+                                    backgroundColor: index == 0 ?  Colors.amber :
                                     index == 1 ? Colors.pinkAccent :
                                     index == 2? Colors.teal : Colors.indigo,
                                     child: selectedColor == index ? const Icon(Icons.check,
@@ -223,54 +266,27 @@ class _AddProjectState extends State<AddProject> {
                   ),
                 ),
               ),
-              SizedBox(height: SizeConfig.screenHeight * 0.02),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                child: Text('Participants:',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
-              SizedBox(height: SizeConfig.screenHeight * 0.01),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: SizedBox(
-                  height: 150,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.grey.shade300,
-                        child: const Icon(Icons.add,
-                          size: 30,
-                          color: Color(0xfff77546),
-                        ),
-                      ),
-                    ],
-                  ),
-                  ),
-                ),
-              SizedBox(height: getProportionateScreenHeight(30)),
+              SizedBox(height: getProportionateScreenHeight(120)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    alignment: Alignment.center,
-                    width: 300,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: const Color(0xfff77546),
-                    ),
-                    child: const Text('Continue',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                  GestureDetector(
+                    onTap: (){
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 300,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: const Color(0xfff77546),
+                      ),
+                      child: const Text('Continue',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                   ),
@@ -283,3 +299,4 @@ class _AddProjectState extends State<AddProject> {
     );
   }
 }
+

@@ -3,7 +3,7 @@ import '../entity/project_entity.dart';
 
 //ignore: must_be_immutable
 class Project extends Equatable {
-  String prId;
+  String? prId;
   String prName;
   String prDescription;
   DateTime? startDate;
@@ -12,7 +12,7 @@ class Project extends Equatable {
   String owner;
 
   Project({
-    required this.prId,
+    this.prId,
     required this.prName,
     required this.prDescription,
     required this.startDate,

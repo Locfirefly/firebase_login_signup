@@ -29,6 +29,7 @@ class MyUser extends Equatable {
     String? id,
     String? email,
     String? name,
+    String? password,
     String? picture,
   }) {
     return MyUser(

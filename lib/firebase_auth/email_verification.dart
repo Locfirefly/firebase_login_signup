@@ -18,11 +18,11 @@ class _VerificationState extends State<Verification> {
   late Timer timer;
 
   @override
-  void initState() async {
+  void initState()  {
     user = auth.currentUser!;
     user.sendEmailVerification();
     timer = Timer.periodic(
-        const Duration(seconds: 3), (timer) {
+        const Duration(seconds: 2), (timer) {
           checkEmailVerified();
     });
     super.initState();
@@ -133,7 +133,7 @@ class _VerificationState extends State<Verification> {
       timer.cancel();
       autologin();
       if (!context.mounted) return;
-      Navigator.of(context).pushReplacementNamed('Login');
+      Navigator.of(context).pushReplacementNamed('navbar');
     }
   }
   Future<void> autologin() async {
